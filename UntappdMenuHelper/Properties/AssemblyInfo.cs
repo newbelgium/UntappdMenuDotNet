@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UntappdMenuBuilder")]
-[assembly: AssemblyDescription("UntappdMenu builder for use in your applications")]
+[assembly: AssemblyTitle("UntappdMenuHelper")]
+[assembly: AssemblyDescription("UntappdMenu helper for use in your applications")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("New Belgium Brewing Company")]
-[assembly: AssemblyProduct("UntappdMenuBuilder")]
+[assembly: AssemblyProduct("UntappdMenuHelper")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
