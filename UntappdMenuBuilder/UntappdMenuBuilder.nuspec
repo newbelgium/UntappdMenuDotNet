@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>1.0.5</version>
+		<title>$title$</title>
+		<authors>New Belgium Brewing Company</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/newbelgium/</projectUrl>
+		<repository type="git" url="https://github.com/newbelgium/nugetpackages"  />
+		<description>A menu builder for untappd for breweries to showcase their menus.</description>
+		<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>	
+		<copyright>$copyright$</copyright>
+		<tags>Untappd</tags>
+	</metadata>
+</package>
