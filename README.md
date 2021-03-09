@@ -11,12 +11,12 @@ You need to generate an access token, which consists of a user email and an API 
 Once you have your API key and a user for the Untappd menu with API access, you can use the UntappdMenuHelper, powered by UntappdNet to get your menu's.
 
 First, create the byte array, this is your access token
-var byteArray = Encoding.ASCII.GetBytes($"{UntappdAdminEmail}:{UntappdAdminApiKey}");
+- var byteArray = Encoding.ASCII.GetBytes($"{UntappdAdminEmail}:{UntappdAdminApiKey}");
 
 Once your access token is created, you can start to use the UntappdMenuHelper to get your menu pieces
 
 Instantiate a service:
-private readonly UntappdMenuJSON.UntappdService _untappdMenuService = new UntappdService();
+- private readonly UntappdMenuJSON.UntappdService _untappdMenuService = new UntappdService();
 
 then use the service to get:
 Location Data
