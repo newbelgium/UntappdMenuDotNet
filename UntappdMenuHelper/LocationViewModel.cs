@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UntappdMenuJSON
+namespace UntappdMenuHelper
 {
 
     public partial class UntappdLocation

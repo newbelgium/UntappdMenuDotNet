@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace UntappdMenuJSON
+namespace UntappdMenuHelper
 {
     public partial class UntappdMenuItemContainers
     {

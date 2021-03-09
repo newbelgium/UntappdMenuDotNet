@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace UntappdMenuJSON
+namespace UntappdMenuHelper
 {
     /// <summary>
     /// Collection of tasks that can be performed to get menuu's by a location id
