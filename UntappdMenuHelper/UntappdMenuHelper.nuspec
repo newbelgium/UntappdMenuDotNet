@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>$id$</id>
-		<version>1.0.13</version>
+		<version>1.1.0</version>
 		<title>$title$</title>
 		<authors>New Belgium Brewing Company</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/newbelgium/</projectUrl>
 		<repository type="git" url="https://github.com/newbelgium/untappdmenuhelper"  />
 		<description>A menu helper for untappd for breweries to showcase their menus.</description>
-		<releaseNotes>Constructor will initialize the use of the API with the user credentials, instead of adding the credentials in each call.</releaseNotes>	
+		<releaseNotes>Constructor will initialize the use of the API with the user credentials, instead of adding the credentials in each call.</releaseNotes>
 		<copyright>$copyright$</copyright>
 		<tags>Untappd</tags>
 	</metadata>
