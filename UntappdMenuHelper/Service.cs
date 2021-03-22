@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UntappdMenuHelper
+namespace UntappdMenuDotNet
 {
     /// <summary>
     /// Collection of tasks that can be performed to get menuu's by a location id

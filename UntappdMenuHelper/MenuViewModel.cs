@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UntappdMenuHelper
+namespace UntappdMenuDotNet
 {
     public partial class UntappdMenus
     {
