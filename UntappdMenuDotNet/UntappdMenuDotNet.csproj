@@ -7,8 +7,8 @@
     <ProjectGuid>{988F0BC9-80A9-4BF6-A9EF-3944C62DE3E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UntappdMenuHelper</RootNamespace>
-    <AssemblyName>UntappdMenuHelper</AssemblyName>
+    <RootNamespace>UntappdMenuDotNet</RootNamespace>
+    <AssemblyName>UntappdMenuDotNet</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
