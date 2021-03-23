@@ -3,13 +3,13 @@ using System;
 
 namespace UntappdMenuDotNet
 {
-    public partial class UntappdMenuItems
+    public class UntappdMenuItems
     {
         [JsonProperty("items")]
         public UntappdMenuItem[] Items { get; set; }
     }
 
-    public partial class UntappdMenuItem
+    public class UntappdMenuItem
     {
         [JsonProperty("id")]
         public long? Id { get; set; }
