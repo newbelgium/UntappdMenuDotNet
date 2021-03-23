@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdMenuDotNet", "UntappdMenuDotNet\UntappdMenuDotNet.csproj", "{988F0BC9-80A9-4BF6-A9EF-3944C62DE3E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdMenuDotNet.UnitTest", "UntappdMenuDotNet.UnitTest\UntappdMenuDotNet.UnitTest.csproj", "{AD84E1BA-F5E3-45C1-835A-E0836585253B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{988F0BC9-80A9-4BF6-A9EF-3944C62DE3E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{988F0BC9-80A9-4BF6-A9EF-3944C62DE3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{988F0BC9-80A9-4BF6-A9EF-3944C62DE3E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD84E1BA-F5E3-45C1-835A-E0836585253B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD84E1BA-F5E3-45C1-835A-E0836585253B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD84E1BA-F5E3-45C1-835A-E0836585253B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD84E1BA-F5E3-45C1-835A-E0836585253B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
