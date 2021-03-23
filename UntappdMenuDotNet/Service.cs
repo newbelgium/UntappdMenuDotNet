@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 namespace UntappdMenuDotNet
 {
     /// <summary>
-    /// Collection of tasks that can be performed to get menuu's by a location id
+    /// Collection of tasks that can be performed to get menus by a location id
     /// </summary>
     public interface IUntappdService
     {
-        Task<UntappdLocation> GetLocationCollection();
+        Task<UntappdLocationCollection> GetLocationCollection();
         Task<UntappdMenus> GetMenuCollectionByLocation(long locationId);
         Task<UntappdMenuAnnouncements> GetMenuAnnouncementCollectionByLocation(long locationId);
         Task<UntappdMenuSections> GetSectionCollectionByMenu(long menuId);
@@ -19,7 +19,7 @@ namespace UntappdMenuDotNet
 
         #region obsolete
         [Obsolete("instantiate service with credentials and call methods without byte array", true)]
-        Task<UntappdLocation> GetLocationCollection(byte[] byteArray);
+        Task<UntappdLocationCollection> GetLocationCollection(byte[] byteArray);
         [Obsolete("instantiate service with credentials and call methods without byte array", true)]
         Task<UntappdMenus> GetMenuCollectionByLocation(byte[] byteArray, long locationId);
         [Obsolete("instantiate service with credentials and call methods without byte array", true)]
@@ -35,32 +35,51 @@ namespace UntappdMenuDotNet
 
     public class UntappdService : IUntappdService
     {
+        // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
+        static readonly HttpClient _client = new HttpClient();
 
         private readonly string urlBase = "https://business.untappd.com/api";
         private readonly string apiVersion = "v1";
 
-        private byte[] _userCredentials { get; set; }
+        private void SetUserCredentials(byte[] value)
+        {
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(value));
+        }
 
         public UntappdService(byte[] userCredentials)
         {
-            _userCredentials = userCredentials;
+            SetUserCredentials(userCredentials ?? throw new ArgumentNullException(nameof(userCredentials)));
         }
 
         public UntappdService(string username, string apitoken)
         {
-            _userCredentials = Encoding.ASCII.GetBytes($"{username}:{apitoken}");
+            if (username == null)
+                throw new ArgumentNullException(username);
+            if (apitoken == null)
+                throw new ArgumentNullException(apitoken);
+
+            SetUserCredentials(Encoding.ASCII.GetBytes($"{username}:{apitoken}"));
         }
 
-        public async Task<UntappdLocation> GetLocationCollection()
+        private async Task<T> Get<T>(string resource)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/locations");
-            HttpClient client = new HttpClient();
+            Uri uri = new Uri($"{urlBase}/{apiVersion}/{resource}");
+            HttpResponseMessage response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                HttpContent content = response.Content;
+                return await content.ReadAsAsync<T>();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsAsync<UntappdError>();
+                throw new UntappdException($"Error occurred.  Code: {response.StatusCode}. Reason: {response.ReasonPhrase}", error);
+            }
+        }
 
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdLocation>();
+        public async Task<UntappdLocationCollection> GetLocationCollection()
+        {
+            return await Get<UntappdLocationCollection>("locations");
         }
 
         /// <summary>
@@ -69,14 +88,7 @@ namespace UntappdMenuDotNet
         /// <returns>Collection of menu's</returns>
         public async Task<UntappdMenus> GetMenuCollectionByLocation(long locationId)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/locations/{locationId}/menus");
-            HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdMenus>();
+            return await Get<UntappdMenus>($"locations/{locationId}/menus");
         }
 
         /// <summary>
@@ -85,14 +97,7 @@ namespace UntappdMenuDotNet
         /// <returns>Collection of menu annoucements</returns>
         public async Task<UntappdMenuAnnouncements> GetMenuAnnouncementCollectionByLocation(long locationId)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/locations/{locationId}/menu_announcements");
-            HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdMenuAnnouncements>();
+            return await Get<UntappdMenuAnnouncements>($"locations/{locationId}/menu_announcements");
         }
 
         /// <summary>
@@ -101,14 +106,7 @@ namespace UntappdMenuDotNet
         /// <returns>Collection of sections for a menu.</returns>
         public async Task<UntappdMenuSections> GetSectionCollectionByMenu(long menuId)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/menus/{menuId}/sections");
-            HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdMenuSections>();
+            return await Get<UntappdMenuSections>($"menus/{menuId}/sections");
         }
 
         /// <summary>
@@ -117,14 +115,7 @@ namespace UntappdMenuDotNet
         /// <returns>Collection of items in a section</returns>
         public async Task<UntappdMenuItems> GetItemCollectionBySection(long sectionId)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/sections/{sectionId}/items");
-            HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdMenuItems>();
+            return await Get<UntappdMenuItems>($"sections/{sectionId}/items");
         }
 
         /// <summary>
@@ -133,14 +124,7 @@ namespace UntappdMenuDotNet
         /// <returns>Collection of item containers</returns>
         public async Task<UntappdMenuItemContainers> GetItemContainersCollectionByItem(long itemId)
         {
-            Uri uri = new Uri($"{urlBase}/{apiVersion}/items/{itemId}/containers");
-            HttpClient client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(_userCredentials));
-            HttpResponseMessage response = await client.GetAsync(uri);
-            HttpContent content = response.Content;
-
-            return await content.ReadAsAsync<UntappdMenuItemContainers>();
+            return await Get<UntappdMenuItemContainers>($"items/{itemId}/containers");
         }
 
         #region OBSOLETE
@@ -152,7 +136,7 @@ namespace UntappdMenuDotNet
         /// </summary>
         /// <returns>Collection of locations based on the authenticated user</returns>
         /// 
-        public async Task<UntappdLocation> GetLocationCollection(byte[] byteArray)
+        public async Task<UntappdLocationCollection> GetLocationCollection(byte[] byteArray)
         {
             Uri uri = new Uri("https://business.untappd.com/api/v1/locations");
             HttpClient client = new HttpClient();
@@ -161,7 +145,7 @@ namespace UntappdMenuDotNet
             HttpResponseMessage response = await client.GetAsync(uri);
             HttpContent content = response.Content;
 
-            return await content.ReadAsAsync<UntappdLocation>();
+            return await content.ReadAsAsync<UntappdLocationCollection>();
         }
         [Obsolete("instantiate service with credentials and call methods without byte array", true)]
         /// <summary>

@@ -48,13 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LocationViewModel.cs" />
-    <Compile Include="MenuAnnoucementsViewModel.cs" />
+    <Compile Include="MenuAnnouncementsViewModel.cs" />
     <Compile Include="MenuItemContainerViewModel.cs" />
     <Compile Include="MenuItemsViewModel.cs" />
     <Compile Include="MenuSectionsViewModel.cs" />
     <Compile Include="MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="UntappdException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,14 +4,20 @@ using System.Collections.Generic;
 
 namespace UntappdMenuDotNet
 {
-
-    public partial class UntappdLocation
+    [Obsolete("Deprecated in favor of UntappdLocationCollection", true)]
+    public class UntappdLocation
     {
         [JsonProperty("locations")]
         public List<UntappdLocationElement> Locations { get; set; }
     }
 
-    public partial class UntappdLocationElement
+    public class UntappdLocationCollection
+    {
+        [JsonProperty("locations")]
+        public List<UntappdLocationElement> Locations { get; set; }
+    }
+
+    public class UntappdLocationElement
     {
         [JsonProperty("id")]
         public long? Id { get; set; }
@@ -181,7 +187,7 @@ namespace UntappdMenuDotNet
         public UntappdMenuAnnouncements UntappdMenuAnnouncements { get; set; }
     }
 
-    public partial class UntappdHour
+    public class UntappdHour
     {
         [JsonProperty("id")]
         public long? Id { get; set; }

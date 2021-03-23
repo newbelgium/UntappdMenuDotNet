@@ -3,12 +3,12 @@ using System;
 
 namespace UntappdMenuDotNet
 {
-    public partial class UntappdMenuItemContainers
+    public class UntappdMenuItemContainers
     {
         [JsonProperty("containers")]
         public UntappdMenuItemContainer[] Containers { get; set; }
     }
-    public partial class UntappdMenuItemContainer
+    public class UntappdMenuItemContainer
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -38,7 +38,7 @@ namespace UntappdMenuDotNet
         public long TrackBy { get; set; }
     }
 
-    public partial class UntappdMenuItemContainerSize
+    public class UntappdMenuItemContainerSize
     {
         [JsonProperty("id")]
         public long Id { get; set; }

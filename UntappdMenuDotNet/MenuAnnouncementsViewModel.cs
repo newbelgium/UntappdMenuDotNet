@@ -3,7 +3,7 @@ using System;
 
 namespace UntappdMenuDotNet
 {
-    public partial class UntappdMenuAnnouncements
+    public class UntappdMenuAnnouncements
     {
         [JsonProperty("current")]
         public UntappdAnnoucement[] Current { get; set; }
@@ -15,7 +15,7 @@ namespace UntappdMenuDotNet
         public UntappdAnnoucement[] Weekly { get; set; }
     }
 
-    public partial class UntappdAnnoucement
+    public class UntappdAnnoucement
     {
         [JsonProperty("id")]
         public long? Id { get; set; }

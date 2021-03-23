@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace UntappdMenuDotNet
 {
-    public partial class UntappdMenus
+    public class UntappdMenus
     {
         [JsonProperty("menus")]
         public UntappdMenu[] Menus { get; set; }
     }
 
-    public partial class UntappdMenu
+    public class UntappdMenu
     {
         [JsonProperty("id")]
         public long? Id { get; set; }
